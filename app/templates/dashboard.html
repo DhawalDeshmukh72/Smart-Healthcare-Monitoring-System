@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Healthcare Monitoring - Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-branding">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">Smart Healthcare Monitoring</h1>
+                    <p class="brand-subtitle">Real-Time Sensor & Environmental Telemetry</p>
+                </div>
+            </div>
+
+            <div class="header-status">
+                <div id="connection-pill" class="status-pill status-disconnected">
+                    <span class="status-indicator-dot"></span>
+                    <span id="connection-status-text" class="status-text">Connecting...</span>
+                </div>
+                <div class="clock-display" id="system-clock">--:--:--</div>
+            </div>
+        </header>
+
+        <div id="system-banner" class="system-banner banner-info">
+            <div class="banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            </div>
+            <span id="banner-message" class="banner-text">Connecting to sensor stream...</span>
+        </div>
+
+        <main class="metrics-grid">
+            <div class="metric-card card-hr" id="card-hr">
+                <div class="card-top">
+                    <div class="card-label-group">
+                        <div class="metric-icon icon-hr" id="hr-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="card-name">Heart Rate</span>
+                            <span class="card-meta">MAX30100 PPG</span>
+                        </div>
+                    </div>
+                    <span id="hr-status-badge" class="badge badge-neutral">Standby</span>
+                </div>
+                <div class="card-value-wrap">
+                    <span id="hr-value" class="metric-val">--.-</span>
+                    <span class="metric-unit">BPM</span>
+                </div>
+                <div class="card-bottom">
+                    <span id="hr-subtext" class="sub-info">Waiting for finger contact</span>
+                </div>
+            </div>
+
+            <div class="metric-card card-spo2" id="card-spo2">
+                <div class="card-top">
+                    <div class="card-label-group">
+                        <div class="metric-icon icon-spo2">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                                <circle cx="12" cy="14" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="card-name">Blood Oxygen</span>
+                            <span class="card-meta">SpO2 Saturation</span>
+                        </div>
+                    </div>
+                    <span id="spo2-status-badge" class="badge badge-neutral">Standby</span>
+                </div>
+                <div class="card-value-wrap">
+                    <span id="spo2-value" class="metric-val">--</span>
+                    <span class="metric-unit">%</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="mini-bar-track">
+                        <div id="spo2-progress-fill" class="mini-bar-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-card card-temp" id="card-temp">
+                <div class="card-top">
+                    <div class="card-label-group">
+                        <div class="metric-icon icon-temp">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="card-name">Temperature</span>
+                            <span class="card-meta">Ambient Environment</span>
+                        </div>
+                    </div>
+                    <span id="temp-status-badge" class="badge badge-optimal">Normal</span>
+                </div>
+                <div class="card-value-wrap">
+                    <span id="temp-value" class="metric-val">25.0</span>
+                    <span class="metric-unit">°C</span>
+                </div>
+                <div class="card-bottom">
+                    <span id="temp-subtext" class="sub-info">Active Ambient Stream</span>
+                </div>
+            </div>
+
+            <div class="metric-card card-humidity" id="card-humidity">
+                <div class="card-top">
+                    <div class="card-label-group">
+                        <div class="metric-icon icon-humidity">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="card-name">Humidity</span>
+                            <span class="card-meta">Ambient Moisture</span>
+                        </div>
+                    </div>
+                    <span id="hum-status-badge" class="badge badge-optimal">Optimal</span>
+                </div>
+                <div class="card-value-wrap">
+                    <span id="hum-value" class="metric-val">60.2</span>
+                    <span class="metric-unit">%</span>
+                </div>
+                <div class="card-bottom">
+                    <span id="hum-subtext" class="sub-info">Active Moisture Stream</span>
+                </div>
+            </div>
+        </main>
+
+        <section class="charts-section">
+            <div class="charts-grid">
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <div class="chart-legend">
+                            <span class="dot dot-hr"></span>
+                            <span class="chart-title">Heart Rate (BPM)</span>
+                        </div>
+                        <span id="chart-hr-curr" class="chart-val">-- BPM</span>
+                    </div>
+                    <div class="canvas-wrap">
+                        <canvas id="heartRateChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <div class="chart-header">
+                        <div class="chart-legend">
+                            <span class="dot dot-spo2"></span>
+                            <span class="chart-title">Blood Oxygen SpO2 (%)</span>
+                        </div>
+                        <span id="chart-spo2-curr" class="chart-val">-- %</span>
+                    </div>
+                    <div class="canvas-wrap">
+                        <canvas id="spo2Chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <span>Smart Healthcare Monitoring • Localhost 127.0.0.1</span>
+        </footer>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>

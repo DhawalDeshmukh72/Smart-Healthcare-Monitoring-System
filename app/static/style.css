@@ -1,0 +1,576 @@
+/* ==========================================================================
+   Smart Healthcare Monitoring System - Streamlined Interface Stylesheet
+   Modern, Dark Navy Healthcare Interface with 4 Core Sensor Cards
+   100% Self-Contained: No external CDNs or remote web fonts.
+   ========================================================================== */
+
+:root {
+    /* Color Palette */
+    --bg-app: #080c16;
+    --bg-card: #0e1526;
+    --bg-card-hover: #121c32;
+    --bg-card-inset: #090e1a;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-bright: rgba(255, 255, 255, 0.16);
+
+    /* Text Colors */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Metric Accents */
+    --color-hr: #f43f5e;
+    --color-spo2: #06b6d4;
+    --color-temp: #f59e0b;
+    --color-hum: #10b981;
+
+    /* Status Colors */
+    --status-online: #10b981;
+    --status-warning: #f59e0b;
+    --status-offline: #f43f5e;
+    --status-neutral: #64748b;
+
+    --shadow-card: 0 4px 18px -2px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-subtle);
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 24px 20px;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+}
+
+.header-branding {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-spo2);
+}
+
+.brand-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.brand-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.brand-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.825rem;
+    font-weight: 600;
+    background: var(--bg-card-inset);
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition);
+}
+
+.status-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-neutral);
+    transition: var(--transition);
+}
+
+.status-connected {
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.1);
+}
+.status-connected .status-indicator-dot {
+    background-color: var(--status-online);
+    box-shadow: 0 0 8px var(--status-online);
+}
+
+.status-stale {
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.1);
+}
+.status-stale .status-indicator-dot {
+    background-color: var(--status-warning);
+    box-shadow: 0 0 8px var(--status-warning);
+}
+
+.status-disconnected {
+    color: #fb7185;
+    border-color: rgba(244, 63, 94, 0.3);
+    background: rgba(244, 63, 94, 0.1);
+}
+.status-disconnected .status-indicator-dot {
+    background-color: var(--status-offline);
+    box-shadow: 0 0 8px var(--status-offline);
+}
+
+.clock-display {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    padding: 6px 12px;
+    background: var(--bg-card-inset);
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   Minimal Banner
+   ========================================================================== */
+
+.system-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-subtle);
+    transition: var(--transition);
+}
+
+.system-banner.banner-info {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.25);
+    color: #93c5fd;
+}
+
+.system-banner.banner-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fde68a;
+}
+
+.system-banner.banner-error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
+.system-banner.banner-success {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.25);
+    color: #a7f3d0;
+}
+
+.banner-icon svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.banner-text {
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   4-Card Primary Metrics Grid
+   ========================================================================== */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.metric-card {
+    background: var(--bg-card);
+    border-radius: 18px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.metric-card:hover {
+    border-color: var(--border-bright);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
+
+/* Top Accent Glow Lines */
+.card-hr::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-hr), transparent);
+}
+
+.card-spo2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-spo2), transparent);
+}
+
+.card-temp::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-temp), transparent);
+}
+
+.card-humidity::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-hum), transparent);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-label-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.metric-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.metric-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-hr {
+    background: rgba(244, 63, 94, 0.12);
+    color: var(--color-hr);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.icon-spo2 {
+    background: rgba(6, 182, 212, 0.12);
+    color: var(--color-spo2);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.icon-temp {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--color-temp);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.icon-humidity {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--color-hum);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.icon-hr.beat-pulse {
+    transform: scale(1.22);
+}
+
+.card-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.card-meta {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.badge {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.badge-neutral {
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--text-muted);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.badge-optimal {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.card-value-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.metric-val {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+}
+
+.metric-unit {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.sub-info {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.mini-bar-track {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-card-inset);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 2px;
+}
+
+.mini-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, var(--color-spo2));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* ==========================================================================
+   Waveform Charts
+   ========================================================================== */
+
+.charts-section {
+    background: var(--bg-card);
+    border-radius: 18px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.chart-box {
+    background: var(--bg-card-inset);
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot-hr { background: var(--color-hr); box-shadow: 0 0 6px var(--color-hr); }
+.dot-spo2 { background: var(--color-spo2); box-shadow: 0 0 6px var(--color-spo2); }
+
+.chart-title {
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.chart-val {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.canvas-wrap {
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+
+.canvas-wrap canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 1050px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 12px 10px;
+    }
+
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-status {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .metrics-grid,
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-footer {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

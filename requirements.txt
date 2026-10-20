@@ -1,0 +1,4 @@
+# Python Dependencies for Smart Healthcare Monitoring System
+flask>=3.0.0
+pyserial>=3.5
+pytest>=8.0.0
